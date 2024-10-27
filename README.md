@@ -1,6 +1,6 @@
-# Client Side Rendering
+# React Single Page Application
 
-Exemple d'application avec rendu côté client (CSR).
+Exemple d'application Single Page React avec rendu côté client (CSR).
 
 Stack technique :
 

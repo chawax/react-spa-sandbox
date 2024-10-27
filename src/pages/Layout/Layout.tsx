@@ -7,7 +7,6 @@ export default function Layout() {
         <Link to="/movies">
           <h1 className="text-3xl text-white font-bold">My Movies</h1>
         </Link>
-        <span className="text-white">Client Side Rendering</span>
       </header>
       <main className="p-4">
         <Outlet />
