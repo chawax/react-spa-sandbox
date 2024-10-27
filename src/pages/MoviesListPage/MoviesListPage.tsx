@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import { Loader, MovieCard } from "../../components";
 import { fetchMovies } from "../../services";
 

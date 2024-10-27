@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { format, parse } from "date-fns";
-import { useParams } from "react-router-dom";
 import { ActorCard, FavoriteButton, Loader } from "../../components";
+import { Route } from "../../routes/movies/$movieId";
 import { fetchOneMovie } from "../../services";
 
 const voteFormatter = new Intl.NumberFormat("fr-FR", {
@@ -12,7 +12,7 @@ const voteFormatter = new Intl.NumberFormat("fr-FR", {
 export default function MovieDetailsPage() {
   // Use Tanstack Query to retrieve and cache the movie details
 
-  const { id } = useParams();
+  const { movieId } = Route.useParams();
   const {
     data: movie,
     error,
@@ -20,10 +20,11 @@ export default function MovieDetailsPage() {
     isFetching,
     isSuccess,
   } = useQuery({
-    queryKey: ["movies", id],
-    // @ts-expect-error We always have an id
-    queryFn: () => fetchOneMovie(id!),
+    queryKey: ["movies", movieId],
+    queryFn: () => fetchOneMovie(movieId),
   });
+
+  // const movie = Route.useLoaderData();
 
   // Displays a loader while fetching
 
