@@ -11,7 +11,7 @@ const getHeaders = (): HeadersInit => {
   };
 };
 
-const fetchOneMovie = async (id: number): Promise<MovieDetails> => {
+const fetchOneMovie = async (id: string): Promise<MovieDetails> => {
   // We load queries to get details and credits
 
   const detailsUrl = `${
