@@ -8,41 +8,8 @@ const voteFormatter = new Intl.NumberFormat("fr-FR", {
 });
 
 export default function MovieDetailsPage() {
-  // Use Tanstack Query to retrieve and cache the movie details
-
-  // const { movieId } = Route.useParams();
-  // const {
-  //   data: movie,
-  //   error,
-  //   isError,
-  //   isFetching,
-  //   isSuccess,
-  // } = useQuery({
-  //   queryKey: ["movies", movieId],
-  //   queryFn: () => fetchOneMovie(movieId),
-  // });
-
   const movie = Route.useLoaderData();
 
-  // Displays a loader while fetching
-
-  // if (isFetching) {
-  //   return <Loader />;
-  // }
-
-  // Displays the error message if fetching failed
-
-  // if (isError) {
-  //   return (
-  //     <p className="text-red-400">
-  //       Impossible de charger les données : {error.message}
-  //     </p>
-  //   );
-  // }
-
-  // Displays the details of movie if fetching was successful
-
-  // if (isSuccess) {
   const imgUrl = `https://image.tmdb.org/t/p/w500${movie.posterPath}`;
   const formattedReleaseDate = format(
     parse(movie.releaseDate, "yyyy-MM-dd", new Date()),
@@ -102,5 +69,4 @@ export default function MovieDetailsPage() {
       </div>
     </article>
   );
-  // }
 }
