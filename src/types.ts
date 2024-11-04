@@ -1,5 +1,5 @@
 export type MovieResume = {
-  id: number;
+  id: string;
   title: string;
   overview: string;
   releaseDate: string;
@@ -15,7 +15,7 @@ export type MovieDetails = MovieResume & {
 };
 
 export type Actor = {
-  id: number;
+  id: string;
   name: string;
   profilePath: string;
 };
