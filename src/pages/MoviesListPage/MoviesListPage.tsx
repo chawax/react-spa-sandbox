@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { MovieCard } from "../../components";
-import { Route } from "../../routes/movies";
+import { MovieCard } from "@/components";
+import { Route } from "@/routes/movies";
 
 export default function MoviesListPage() {
   const movies = Route.useLoaderData();

@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef } from "react";
-import useFavorite from "../hooks/useFavorite";
+import useFavorite from "@/hooks/useFavorite";
 
 type FavoriteButtonProps = {
-  id: number;
+  id: string;
 };
 
 type ButtonProps = ComponentPropsWithoutRef<"button">;

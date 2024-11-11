@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
-const loadFavorites = (): number[] => {
+const loadFavorites = (): string[] => {
   const value = localStorage.getItem("favorites");
-  const favorites: number[] = value ? JSON.parse(value) : [];
+  const favorites: string[] = value ? JSON.parse(value) : [];
   return favorites;
 };
 
-const saveFavorites = (favorites: number[]): void => {
+const saveFavorites = (favorites: string[]): void => {
   localStorage.setItem("favorites", JSON.stringify(favorites));
 };
 
-const useFavorite = (id: number) => {
-  const [favorites, setFavorites] = useState<number[]>([]);
+const useFavorite = (id: string) => {
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
     const favorites = loadFavorites();

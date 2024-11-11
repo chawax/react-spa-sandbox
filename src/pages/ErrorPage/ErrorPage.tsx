@@ -1,16 +1,12 @@
-import { useRouteError } from "react-router-dom";
+import { ErrorComponentProps } from "@tanstack/react-router";
 
-export default function ErrorPage() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const error: any = useRouteError();
-  console.error(error);
-
+export default function ErrorPage({ error }: ErrorComponentProps) {
   return (
-    <div id="error-page">
+    <div>
       <h1>Oops!</h1>
       <p>Désolé, une erreur inattendue s'est produite.</p>
       <p>
-        <i>{error.statusText || error.message}</i>
+        <i>{error.message}</i>
       </p>
     </div>
   );
