@@ -1,6 +1,6 @@
 import { format, parse } from "date-fns";
-import { ActorCard, FavoriteButton } from "../../components";
-import { Route } from "../../routes/movies/$movieId";
+import { ActorCard, FavoriteButton } from "@/components";
+import { Route } from "@/routes/movies/$movieId";
 
 const voteFormatter = new Intl.NumberFormat("fr-FR", {
   style: "decimal",
