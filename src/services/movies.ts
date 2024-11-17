@@ -112,3 +112,38 @@ export const fetchPopularMovies = async (): Promise<Array<MovieResume>> => {
     posterPath: result.poster_path,
   }));
 };
+
+export const searchMovies = async (
+  query: string,
+): Promise<Array<MovieResume>> => {
+  const url = `${import.meta.env.VITE_API_URL}/search/movie?language=fr-FR&query=${query}`;
+  console.log(`Fetching ${url} ...`);
+  const response = await fetch(url, {
+    headers: getHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to search movies");
+  }
+  const { results } = await response.json();
+  return (
+    results
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // .filter((movie: any) => {
+      //   // We remove movies with no release date
+      //   return movie.release_date !== "";
+      // })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .map((result: any) => {
+        return {
+          id: result.id,
+          title: result.title,
+          overview: result.overview,
+          releaseDate: result.release_date,
+          popularity: result.popularity,
+          voteAverage: result.vote_average,
+          posterPath: result.poster_path,
+        };
+      })
+  );
+};
