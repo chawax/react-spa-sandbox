@@ -5,7 +5,7 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <header className="bg-black p-4 sticky top-0">
-        <Link to="/movies">
+        <Link to="/">
           <h1 className="text-3xl text-white font-bold">My Movies</h1>
         </Link>
       </header>
