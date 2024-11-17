@@ -11,7 +11,7 @@ const getHeaders = (): HeadersInit => {
   };
 };
 
-const fetchOneMovie = async (id: string): Promise<MovieDetails> => {
+export const fetchOneMovie = async (id: string): Promise<MovieDetails> => {
   // We load queries to get details and credits
 
   const detailsUrl = `${
@@ -65,7 +65,7 @@ const fetchOneMovie = async (id: string): Promise<MovieDetails> => {
   };
 };
 
-const fetchTrendingMovies = async (): Promise<Array<MovieResume>> => {
+export const fetchTrendingMovies = async (): Promise<Array<MovieResume>> => {
   const url = `${
     import.meta.env.VITE_API_URL
   }/trending/movie/week?language=fr-FR`;
@@ -89,5 +89,3 @@ const fetchTrendingMovies = async (): Promise<Array<MovieResume>> => {
     posterPath: result.poster_path,
   }));
 };
-
-export { fetchOneMovie, fetchTrendingMovies as fetchMovies };

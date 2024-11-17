@@ -1,12 +1,13 @@
+import { createFileRoute } from "@tanstack/react-router";
+
 import { Loader } from "@/components";
 import MoviesList from "@/components/MoviesList";
 import { ErrorPage } from "@/pages/ErrorPage";
-import { fetchMovies } from "@/services";
-import { createFileRoute } from "@tanstack/react-router";
+import { fetchTrendingMovies } from "@/services";
 
 export const Route = createFileRoute("/movies/trending")({
   component: TrendingMoviesPage,
-  loader: fetchMovies,
+  loader: fetchTrendingMovies,
   pendingComponent: Loader,
   errorComponent: ErrorPage,
 });
