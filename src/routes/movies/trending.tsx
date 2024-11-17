@@ -4,7 +4,7 @@ import { ErrorPage } from "@/pages/ErrorPage";
 import { fetchMovies } from "@/services";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/trending")({
+export const Route = createFileRoute("/movies/trending")({
   component: TrendingMoviesPage,
   loader: fetchMovies,
   pendingComponent: Loader,
