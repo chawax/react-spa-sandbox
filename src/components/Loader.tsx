@@ -1,4 +1,4 @@
-const Loader = () => {
+export default function Loader() {
   return (
     <div role="status">
       <svg
@@ -20,6 +20,4 @@ const Loader = () => {
       <span className="sr-only">Loading...</span>
     </div>
   );
-};
-
-export default Loader;
+}

@@ -1,16 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { format, parse } from "date-fns";
 
-import { FavoriteButton, Loader } from "@/components";
 import ActorsList from "@/components/ActorsList";
-import { ErrorPage } from "@/pages/ErrorPage";
-import { fetchOneMovie } from "@/services";
+import ErrorComponent from "@/components/ErrorComponent";
+import FavoriteButton from "@/components/FavoriteButton";
+import Loader from "@/components/Loader";
+import { fetchOneMovie } from "@/services/movies";
+
+// Route configuration
 
 export const Route = createFileRoute("/movies/$movieId")({
   component: MovieDetailsPage,
   loader: async ({ params: { movieId } }) => fetchOneMovie(movieId),
   pendingComponent: Loader,
-  errorComponent: ErrorPage,
+  errorComponent: ErrorComponent,
 });
 
 const voteFormatter = new Intl.NumberFormat("fr-FR", {

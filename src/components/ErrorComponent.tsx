@@ -1,6 +1,6 @@
 import { ErrorComponentProps } from "@tanstack/react-router";
 
-export default function ErrorPage({ error }: ErrorComponentProps) {
+export default function ErrorComponent({ error }: ErrorComponentProps) {
   return (
     <div>
       <h1>Oops!</h1>

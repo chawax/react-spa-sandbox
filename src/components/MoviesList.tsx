@@ -1,5 +1,6 @@
-import { MovieResume } from "@/types";
 import { Link } from "@tanstack/react-router";
+
+import { MovieResume } from "@/types";
 import MovieCard from "./MovieCard";
 
 type MoviesListProps = {

@@ -4,6 +4,7 @@ type ActorCardProps = {
   actor: Actor;
   className: string;
 };
+
 const ActorCard = ({ actor, className }: ActorCardProps) => {
   return (
     <div className={className}>
