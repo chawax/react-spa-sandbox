@@ -15,6 +15,10 @@ export default function Header() {
             Tendance
           </Link>
           &nbsp;|&nbsp;
+          <Link to="/movies/popular" className="hover:text-gray-400 mx-4">
+            Populaires
+          </Link>
+          &nbsp;|&nbsp;
           <Link to="/movies/search" className="hover:text-gray-400 mx-4">
             Recherche
           </Link>

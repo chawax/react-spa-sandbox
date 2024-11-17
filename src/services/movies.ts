@@ -89,3 +89,26 @@ export const fetchTrendingMovies = async (): Promise<Array<MovieResume>> => {
     posterPath: result.poster_path,
   }));
 };
+
+export const fetchPopularMovies = async (): Promise<Array<MovieResume>> => {
+  const url = `${import.meta.env.VITE_API_URL}/movie/popular?language=fr-FR`;
+  console.log(`Fetching ${url} ...`);
+  const response = await fetch(url, {
+    headers: getHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch popular movies data");
+  }
+  const { results } = await response.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return results.map((result: any) => ({
+    id: result.id,
+    title: result.title,
+    overview: result.overview,
+    releaseDate: result.release_date,
+    popularity: result.popularity,
+    voteAverage: result.vote_average,
+    posterPath: result.poster_path,
+  }));
+};
