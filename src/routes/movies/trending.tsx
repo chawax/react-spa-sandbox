@@ -11,7 +11,7 @@ export const Route = createFileRoute("/movies/trending")({
   errorComponent: ErrorPage,
 });
 
-export default function TrendingMoviesPage() {
+function TrendingMoviesPage() {
   const movies = Route.useLoaderData();
   return movies.length > 0 ? <MoviesList movies={movies} /> : <p>Aucun film</p>;
 }
