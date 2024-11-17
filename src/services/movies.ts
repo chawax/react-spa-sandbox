@@ -65,7 +65,7 @@ const fetchOneMovie = async (id: string): Promise<MovieDetails> => {
   };
 };
 
-const fetchMovies = async (): Promise<Array<MovieResume>> => {
+const fetchTrendingMovies = async (): Promise<Array<MovieResume>> => {
   const url = `${
     import.meta.env.VITE_API_URL
   }/trending/movie/week?language=fr-FR`;
@@ -90,4 +90,4 @@ const fetchMovies = async (): Promise<Array<MovieResume>> => {
   }));
 };
 
-export { fetchOneMovie, fetchMovies };
+export { fetchOneMovie, fetchTrendingMovies as fetchMovies };

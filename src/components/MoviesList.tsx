@@ -1,11 +1,13 @@
+import { MovieResume } from "@/types";
 import { Link } from "@tanstack/react-router";
-import { MovieCard } from "@/components";
-import { Route } from "@/routes/movies";
+import MovieCard from "./MovieCard";
 
-export default function MoviesListPage() {
-  const movies = Route.useLoaderData();
+type MoviesListProps = {
+  movies: MovieResume[];
+};
 
-  return movies.length > 0 ? (
+export default function MoviesList({ movies }: MoviesListProps) {
+  return (
     <section className="flex flex-row flex-wrap justify-between">
       {movies.map((movie) => {
         return (
@@ -20,7 +22,5 @@ export default function MoviesListPage() {
         );
       })}
     </section>
-  ) : (
-    <p>Aucun film</p>
   );
 }
