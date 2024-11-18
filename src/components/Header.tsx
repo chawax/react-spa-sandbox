@@ -19,7 +19,11 @@ export default function Header() {
             Populaires
           </Link>
           &nbsp;|&nbsp;
-          <Link to="/movies/search" className="hover:text-gray-400 mx-4">
+          <Link
+            to="/movies/search"
+            search={{ query: "" }}
+            className="hover:text-gray-400 mx-4"
+          >
             Recherche
           </Link>
         </nav>

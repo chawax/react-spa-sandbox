@@ -21,7 +21,8 @@ export const Route = createFileRoute("/movies/search")({
     };
   },
   loaderDeps: ({ search: { query } }) => ({ query }),
-  loader: ({ deps }) => searchMovies(deps.query),
+  loader: ({ deps }) =>
+    deps.query !== undefined ? searchMovies(deps.query) : [],
   pendingComponent: Loader,
   errorComponent: ErrorComponent,
 });
@@ -43,11 +44,25 @@ function SearchMoviesPage() {
 
   return (
     <>
-      <div className="container">
-        <input type="text" value={query} onChange={handleChange} />
-        <input type="button" value="Rechercher" onClick={handleSearch} />
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex gap-4 justify-center">
+          <input
+            type="text"
+            value={searchString}
+            onChange={handleChange}
+            className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-96"
+            placeholder="Rechercher un film..."
+          />
+          <button
+            type="submit"
+            onClick={handleSearch}
+            className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors"
+          >
+            Rechercher
+          </button>
+        </div>
       </div>
-      {query !== "" && movies.length > 0 ? (
+      {movies.length > 0 ? (
         <MoviesList movies={movies} />
       ) : (
         <p>Aucun film trouvé !</p>
