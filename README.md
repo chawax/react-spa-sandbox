@@ -7,7 +7,7 @@ Stack technique :
 - Vite
 - React
 - Typescript
-- React Router
+- Tanstack Router
 - Tailwind
 
 Installation :
