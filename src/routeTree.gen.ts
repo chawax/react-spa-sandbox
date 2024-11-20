@@ -11,6 +11,8 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ProfileImport } from './routes/profile'
+import { Route as LoginImport } from './routes/login'
 import { Route as IndexImport } from './routes/index'
 import { Route as MoviesTrendingImport } from './routes/movies/trending'
 import { Route as MoviesSearchImport } from './routes/movies/search'
@@ -18,6 +20,18 @@ import { Route as MoviesPopularImport } from './routes/movies/popular'
 import { Route as MoviesMovieIdImport } from './routes/movies/$movieId'
 
 // Create/Update Routes
+
+const ProfileRoute = ProfileImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginRoute = LoginImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -60,6 +74,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileImport
+      parentRoute: typeof rootRoute
+    }
     '/movies/$movieId': {
       id: '/movies/$movieId'
       path: '/movies/$movieId'
@@ -95,6 +123,8 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/profile': typeof ProfileRoute
   '/movies/$movieId': typeof MoviesMovieIdRoute
   '/movies/popular': typeof MoviesPopularRoute
   '/movies/search': typeof MoviesSearchRoute
@@ -103,6 +133,8 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/profile': typeof ProfileRoute
   '/movies/$movieId': typeof MoviesMovieIdRoute
   '/movies/popular': typeof MoviesPopularRoute
   '/movies/search': typeof MoviesSearchRoute
@@ -112,6 +144,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/profile': typeof ProfileRoute
   '/movies/$movieId': typeof MoviesMovieIdRoute
   '/movies/popular': typeof MoviesPopularRoute
   '/movies/search': typeof MoviesSearchRoute
@@ -122,6 +156,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
+    | '/profile'
     | '/movies/$movieId'
     | '/movies/popular'
     | '/movies/search'
@@ -129,6 +165,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/login'
+    | '/profile'
     | '/movies/$movieId'
     | '/movies/popular'
     | '/movies/search'
@@ -136,6 +174,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/login'
+    | '/profile'
     | '/movies/$movieId'
     | '/movies/popular'
     | '/movies/search'
@@ -145,6 +185,8 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
+  ProfileRoute: typeof ProfileRoute
   MoviesMovieIdRoute: typeof MoviesMovieIdRoute
   MoviesPopularRoute: typeof MoviesPopularRoute
   MoviesSearchRoute: typeof MoviesSearchRoute
@@ -153,6 +195,8 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
+  ProfileRoute: ProfileRoute,
   MoviesMovieIdRoute: MoviesMovieIdRoute,
   MoviesPopularRoute: MoviesPopularRoute,
   MoviesSearchRoute: MoviesSearchRoute,
@@ -172,6 +216,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/login",
+        "/profile",
         "/movies/$movieId",
         "/movies/popular",
         "/movies/search",
@@ -180,6 +226,12 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/login": {
+      "filePath": "login.tsx"
+    },
+    "/profile": {
+      "filePath": "profile.tsx"
     },
     "/movies/$movieId": {
       "filePath": "movies/$movieId.tsx"
