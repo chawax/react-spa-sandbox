@@ -9,11 +9,11 @@ export function useAuth() {
     isAuthenticated: false,
   });
 
-  const login = () => {
+  const login = async () => {
     setAuthState({ isAuthenticated: true });
   };
 
-  const logout = () => {
+  const logout = async () => {
     setAuthState({ isAuthenticated: false });
   };
 
