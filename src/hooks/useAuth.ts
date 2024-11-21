@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router";
 import { useSessionStorage } from "@uidotdev/usehooks";
 
 interface AuthState {
@@ -5,6 +6,7 @@ interface AuthState {
 }
 
 export function useAuth() {
+  const navigate = useNavigate();
   const [authState, setAuthState] = useSessionStorage<AuthState>("auth", {
     isAuthenticated: false,
   });
@@ -15,6 +17,7 @@ export function useAuth() {
 
   const logout = async () => {
     setAuthState({ isAuthenticated: false });
+    navigate({ to: "/" });
   };
 
   return {
