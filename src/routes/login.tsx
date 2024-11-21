@@ -1,13 +1,14 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useAuth } from "../hooks/useAuth";
 import { FormEvent, useState } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+
+import { useAuth } from "@/hooks/useAuth";
 
 function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const username = formData.get("login") as string;
@@ -15,7 +16,7 @@ function LoginPage() {
 
     // Simulation d'une validation simple
     if (username === "admin" && password === "password") {
-      login();
+      await login();
       navigate({ to: "/" });
     } else {
       setError("Identifiants incorrects");
