@@ -47,6 +47,9 @@ export const Route = createFileRoute("/profile")({
     if (!isAuthenticated) {
       throw redirect({
         to: "/login",
+        search: {
+          redirect: "/profile",
+        },
       });
     }
   },

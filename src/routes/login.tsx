@@ -7,6 +7,7 @@ function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
+  const search = Route.useSearch();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,7 +18,11 @@ function LoginPage() {
     // Simulation d'une validation simple
     if (username === "admin" && password === "password") {
       await login();
-      navigate({ to: "/" });
+      if (search.redirect) {
+        navigate({ to: search.redirect });
+      } else {
+        navigate({ to: "/" });
+      }
     } else {
       setError("Identifiants incorrects");
     }
@@ -73,4 +78,9 @@ function LoginPage() {
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      redirect: search.redirect as string | undefined,
+    };
+  },
 });
