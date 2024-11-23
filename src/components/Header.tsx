@@ -1,42 +1,55 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useMatchRoute } from "@tanstack/react-router";
 import { useAuth } from "../hooks/useAuth";
+
+type NavLinkProps = {
+  to: string;
+  children: React.ReactNode;
+  search?: { query: string };
+};
+
+function NavLink({ to, children, search }: NavLinkProps) {
+  const matchRoute = useMatchRoute();
+  const isActive = matchRoute({ to: to });
+  const baseClasses = "mx-4 hover:text-gray-400 transition-all";
+  const activeClasses = "text-lg font-bold text-gray-400";
+
+  return (
+    <Link
+      to={to}
+      search={search}
+      className={`${baseClasses} ${isActive ? activeClasses : ""}`}
+    >
+      {children}
+    </Link>
+  );
+}
 
 export default function Header() {
   const { isAuthenticated, logout } = useAuth();
 
   return (
     <header className="bg-black p-4 sticky top-0">
-      <div className="flex">
+      <div className="flex text-white">
         <div className="mr-8">
           <Link to="/">
             <h1 className="text-3xl text-white font-bold">My Movies</h1>
           </Link>
         </div>
 
-        <nav className="grow text-white self-center">
-          <Link to="/movies/trending" className="hover:text-gray-400 mx-4">
-            Tendance
-          </Link>
+        <nav className="grow self-center">
+          <NavLink to="/movies/trending">Tendance</NavLink>
           &nbsp;|&nbsp;
-          <Link to="/movies/popular" className="hover:text-gray-400 mx-4">
-            Populaires
-          </Link>
+          <NavLink to="/movies/popular">Populaires</NavLink>
           &nbsp;|&nbsp;
-          <Link
-            to="/movies/search"
-            search={{ query: "" }}
-            className="hover:text-gray-400 mx-4"
-          >
+          <NavLink to="/movies/search" search={{ query: "" }}>
             Recherche
-          </Link>
+          </NavLink>
         </nav>
 
         <div className="flex-none self-center space-x-4">
           {isAuthenticated ? (
             <>
-              <Link to="/profile" className="text-white hover:text-gray-400">
-                Mon Profil
-              </Link>
+              <NavLink to="/profile">Mon Profil</NavLink>
               <button
                 onClick={logout}
                 className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
