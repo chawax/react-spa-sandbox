@@ -1,44 +1,47 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { useAuth } from "../hooks/useAuth";
+import {
+  createRootRoute,
+  Link,
+  Outlet,
+  redirect,
+} from "@tanstack/react-router";
 
-function ProfilePage() {
-  const { isAuthenticated } = useAuth();
+type NavLinkProps = {
+  to: string;
+  children: React.ReactNode;
+};
 
+function NavLink({ to, children }: NavLinkProps) {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Mon Profil</h1>
+    <Link
+      to={to}
+      className="p-2 rounded hover:bg-gray-200 transition-colors"
+      activeProps={{ className: "bg-gray-200 font-bold" }}
+    >
+      {children}
+    </Link>
+  );
+}
 
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-md">
-        <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-2">Informations</h2>
-          <div className="space-y-2">
-            <p>
-              <span className="font-medium">Identifiant :</span> admin
-            </p>
-            <p>
-              <span className="font-medium">Rôle :</span> Utilisateur
-            </p>
-          </div>
-        </div>
+function ProfileLayout() {
+  return (
+    <div className="flex">
+      <aside className="w-64 bg-gray-100 p-4 rounded-lg h-[calc(100vh-120px)] sticky top-20">
+        <nav className="flex flex-col space-y-2">
+          <NavLink to="/profile/infos">Mes informations</NavLink>
+          <NavLink to="/profile/settings">Mes paramètres</NavLink>
+          <NavLink to="/profile/messages">Mes messages</NavLink>
+        </nav>
+      </aside>
 
-        <div className="border-t pt-4">
-          <h2 className="text-xl font-semibold mb-2">Préférences</h2>
-          <div className="space-y-2">
-            <p>
-              <span className="font-medium">Langue :</span> Français
-            </p>
-            <p>
-              <span className="font-medium">Thème :</span> Clair
-            </p>
-          </div>
-        </div>
-      </div>
+      <main className="flex-1">
+        <Outlet />
+      </main>
     </div>
   );
 }
 
-export const Route = createFileRoute("/profile")({
-  component: ProfilePage,
+export const Route = createRootRoute({
+  component: ProfileLayout,
   beforeLoad: ({ context }) => {
     // Redirection si l'utilisateur n'est pas connecté
     const auth = sessionStorage.getItem("auth");
@@ -48,7 +51,7 @@ export const Route = createFileRoute("/profile")({
       throw redirect({
         to: "/login",
         search: {
-          redirect: "/profile",
+          redirect: location.pathname,
         },
       });
     }
