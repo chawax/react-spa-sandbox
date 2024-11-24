@@ -1,5 +1,5 @@
-import { Link, useMatchRoute } from "@tanstack/react-router";
 import { useAuth } from "@/hooks/useAuth";
+import { Link } from "@tanstack/react-router";
 
 type NavLinkProps = {
   to: string;
@@ -8,16 +8,14 @@ type NavLinkProps = {
 };
 
 function NavLink({ to, children, search }: NavLinkProps) {
-  const matchRoute = useMatchRoute();
-  const isActive = matchRoute({ to: to });
   const baseClasses = "mx-4 hover:text-gray-400 transition-all";
   const activeClasses = "text-lg font-bold text-gray-400";
-
   return (
     <Link
       to={to}
       search={search}
-      className={`${baseClasses} ${isActive ? activeClasses : ""}`}
+      className={baseClasses}
+      activeProps={{ className: activeClasses }}
     >
       {children}
     </Link>
@@ -44,19 +42,22 @@ export default function Header() {
           <NavLink to="/movies/search" search={{ query: "" }}>
             Recherche
           </NavLink>
+          {isAuthenticated && (
+            <>
+              &nbsp;|&nbsp;
+              <NavLink to="/profile/infos">Mon Profil</NavLink>
+            </>
+          )}
         </nav>
 
         <div className="flex-none self-center space-x-4">
           {isAuthenticated ? (
-            <>
-              <NavLink to="/profile">Mon Profil</NavLink>
-              <button
-                onClick={logout}
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-              >
-                Déconnexion
-              </button>
-            </>
+            <button
+              onClick={logout}
+              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+            >
+              Déconnexion
+            </button>
           ) : (
             <Link
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
