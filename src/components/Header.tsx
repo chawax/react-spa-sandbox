@@ -1,5 +1,6 @@
-import { useAuth } from "@/hooks/useAuth";
 import { Link } from "@tanstack/react-router";
+
+import { useAuth } from "@/hooks/useAuth";
 
 type NavLinkProps = {
   to: string;
