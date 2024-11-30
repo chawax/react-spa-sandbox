@@ -76,7 +76,9 @@ const MoviesPopularRoute = MoviesPopularImport.update({
   id: '/movies/popular',
   path: '/movies/popular',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/movies/popular.lazy').then((d) => d.Route),
+)
 
 const MoviesMovieIdRoute = MoviesMovieIdImport.update({
   id: '/movies/$movieId',
