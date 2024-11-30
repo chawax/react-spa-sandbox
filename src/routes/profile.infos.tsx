@@ -1,26 +1,52 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useBlocker } from "@tanstack/react-router";
+import { useState } from "react";
+import { Input } from "@/components/Input";
 
 function ProfileInfosPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+  });
+  const [isDirty, setIsDirty] = useState(false);
+
+  useBlocker({
+    condition: isDirty,
+    blockerFn: () => window.confirm("Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"),
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+    setIsDirty(true);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsDirty(false);
+  };
+
   return (
     <div className="bg-white p-6 rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-6">Mes Informations</h2>
-      <form className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">Nom</label>
-          <input
-            type="text"
-            className="w-full p-2 border rounded"
-            placeholder="Votre nom"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1">Email</label>
-          <input
-            type="email"
-            className="w-full p-2 border rounded"
-            placeholder="votre@email.com"
-          />
-        </div>
+      <h2 className="text-2xl font-bold mb-6">Mes informations</h2>
+      <form className="space-y-4" onSubmit={handleSubmit}>
+        <Input
+          label="Nom"
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Votre nom"
+        />
+        <Input
+          label="Email"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="votre@email.com"
+        />
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
