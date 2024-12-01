@@ -41,6 +41,56 @@ function ProfileMessagesPage() {
           content="Votre message a été envoyé avec succès..."
           date="Il y a 10 minutes"
         />
+        <MessageItem
+          title="Mise à jour du compte"
+          content="Votre compte a été mis à jour avec succès..."
+          date="Il y a 1 heure"
+        />
+        <MessageItem
+          title="Recommandations"
+          content="Basé sur vos goûts, voici une sélection de films..."
+          date="Il y a 3 jours"
+        />
+        <MessageItem
+          title="Confirmation d'abonnement"
+          content="Merci d'avoir souscrit à notre service premium..."
+          date="Il y a 1 semaine"
+        />
+        <MessageItem
+          title="Sécurité"
+          content="Une nouvelle connexion a été détectée sur votre compte..."
+          date="Il y a 4 jours"
+        />
+        <MessageItem
+          title="Événement spécial"
+          content="Invitation à l'avant-première du film 'Avatar 3'..."
+          date="Il y a 2 semaines"
+        />
+        <MessageItem
+          title="Maintenance planifiée"
+          content="Notre site sera en maintenance le 15 mars de 2h à 4h..."
+          date="Hier"
+        />
+        <MessageItem
+          title="Sondage utilisateur"
+          content="Donnez-nous votre avis sur notre nouvelle interface..."
+          date="Il y a 6 jours"
+        />
+        <MessageItem
+          title="Mise à jour des CGU"
+          content="Nos conditions générales d'utilisation ont été mises à jour..."
+          date="Il y a 8 jours"
+        />
+        <MessageItem
+          title="Programme fidélité"
+          content="Félicitations ! Vous avez atteint le niveau Gold..."
+          date="Il y a 12 jours"
+        />
+        <MessageItem
+          title="Notification système"
+          content="La synchronisation de votre compte est terminée..."
+          date="Il y a 15 jours"
+        />
       </div>
     </div>
   );
