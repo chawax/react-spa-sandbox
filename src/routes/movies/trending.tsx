@@ -6,10 +6,15 @@ import MoviesList from "@/components/MoviesList";
 import { fetchTrendingMovies } from "@/services/movies";
 
 export const Route = createFileRoute("/movies/trending")({
+
+  // Components
   component: TrendingMoviesPage,
-  loader: fetchTrendingMovies,
   pendingComponent: Loader,
   errorComponent: ErrorComponent,
+
+  // Data loading
+  loader: fetchTrendingMovies,
+  staleTime: 1000 * 60 * 5, // 5 minutes
 });
 
 function TrendingMoviesPage() {
