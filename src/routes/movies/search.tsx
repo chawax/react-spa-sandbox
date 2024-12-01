@@ -42,10 +42,15 @@ function SearchMoviesPage() {
     navigate({ search: { query: searchString } });
   };
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    handleSearch();
+  };
+
   return (
     <>
       <div className="container mx-auto px-4 py-8">
-        <div className="flex gap-4 justify-center">
+        <form onSubmit={handleSubmit} className="flex gap-4 justify-center">
           <input
             type="text"
             value={searchString}
@@ -55,12 +60,11 @@ function SearchMoviesPage() {
           />
           <button
             type="submit"
-            onClick={handleSearch}
             className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors"
           >
             Rechercher
           </button>
-        </div>
+        </form>
       </div>
       {movies.length > 0 ? (
         <MoviesList movies={movies} />
