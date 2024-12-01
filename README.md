@@ -50,7 +50,7 @@ VITE_API_KEY=your_api_key_here
 4. Start the development server
 
 ```bash
-npm start
+npm run dev
 ```
 
 5. Open [http://localhost:5173](http://localhost:5173) in your browser
