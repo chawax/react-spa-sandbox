@@ -13,7 +13,7 @@ export default function MoviesList({ movies }: MoviesListProps) {
       {movies.map((movie) => {
         return (
           <Link
-            to={`/movies/$movieId`}
+            to="/movies/$movieId"
             params={{ movieId: movie.id }}
             key={movie.id}
             className="w-full sm:basis-1/4 sm:w-20"

@@ -10,22 +10,8 @@ import MoviesList from "@/components/MoviesList";
 import { searchMovies } from "@/services/movies";
 
 type MoviesFilters = {
-  query: string;
+  query?: string;
 };
-
-export const Route = createFileRoute("/movies/search")({
-  component: SearchMoviesPage,
-  validateSearch: (search: Record<string, unknown>): MoviesFilters => {
-    return {
-      query: search.query as string,
-    };
-  },
-  loaderDeps: ({ search: { query } }) => ({ query }),
-  loader: ({ deps }) =>
-    deps.query !== undefined ? searchMovies(deps.query) : [],
-  pendingComponent: Loader,
-  errorComponent: ErrorComponent,
-});
 
 function SearchMoviesPage() {
   const movies = Route.useLoaderData();
@@ -74,3 +60,24 @@ function SearchMoviesPage() {
     </>
   );
 }
+
+export const Route = createFileRoute("/movies/search")({
+  // Validate the search parameters
+  validateSearch: (search: Record<string, unknown>): MoviesFilters => {
+    return {
+      query: search.query as string ,
+    };
+  },
+  
+  // Dependencies for the loader
+  loaderDeps: ({ search: { query } }) => ({ key:query }),
+  
+  // Loader function
+  loader: ({ deps }) =>
+    deps.key !== undefined ? searchMovies(deps.key) : [],
+
+  // Components
+  component: SearchMoviesPage,
+  pendingComponent: Loader,
+  errorComponent: ErrorComponent,
+});

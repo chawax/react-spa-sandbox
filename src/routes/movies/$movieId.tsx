@@ -7,15 +7,6 @@ import FavoriteButton from "@/components/FavoriteButton";
 import Loader from "@/components/Loader";
 import { fetchOneMovie } from "@/services/movies";
 
-// Route configuration
-
-export const Route = createFileRoute("/movies/$movieId")({
-  component: MovieDetailsPage,
-  loader: async ({ params: { movieId } }) => fetchOneMovie(movieId),
-  pendingComponent: Loader,
-  errorComponent: ErrorComponent,
-});
-
 const voteFormatter = new Intl.NumberFormat("fr-FR", {
   style: "decimal",
   maximumFractionDigits: 1,
@@ -70,3 +61,13 @@ function MovieDetailsPage() {
     </article>
   );
 }
+
+export const Route = createFileRoute("/movies/$movieId")({
+  // Loader function
+  loader: async ({ params: { movieId } }) => fetchOneMovie(movieId),
+
+  // Components
+  component: MovieDetailsPage,
+  pendingComponent: Loader,
+  errorComponent: ErrorComponent,
+});

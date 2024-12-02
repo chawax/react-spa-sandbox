@@ -5,6 +5,11 @@ import Loader from "@/components/Loader";
 import MoviesList from "@/components/MoviesList";
 import { fetchTrendingMovies } from "@/services/movies";
 
+function TrendingMoviesPage() {
+  const movies = Route.useLoaderData();
+  return movies.length > 0 ? <MoviesList movies={movies} /> : <p>Aucun film</p>;
+}
+
 export const Route = createFileRoute("/movies/trending")({
 
   // Components
@@ -17,7 +22,3 @@ export const Route = createFileRoute("/movies/trending")({
   staleTime: 1000 * 60 * 5, // 5 minutes
 });
 
-function TrendingMoviesPage() {
-  const movies = Route.useLoaderData();
-  return movies.length > 0 ? <MoviesList movies={movies} /> : <p>Aucun film</p>;
-}
