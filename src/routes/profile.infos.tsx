@@ -4,15 +4,14 @@ import { Input } from "@/components/Input";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 
 function ProfileInfosPage() {
+
+  // Manage the form data
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
   });
   const [isDirty, setIsDirty] = useState(false);
-
-  const { proceed, reset, status } = useBlocker({
-    condition: isDirty,
-  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -26,6 +25,12 @@ function ProfileInfosPage() {
     e.preventDefault();
     setIsDirty(false);
   };
+
+  // Blocker to prevent the user from leaving the page with unsaved changes
+
+  const { proceed, reset, status } = useBlocker({
+    condition: isDirty,
+  });
 
   return (
     <>
