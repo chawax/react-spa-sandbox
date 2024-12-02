@@ -42,8 +42,7 @@ function ProfileLayout() {
 
 export const Route = createRootRoute({
   component: ProfileLayout,
-  beforeLoad: ({ context }) => {
-    // Redirection si l'utilisateur n'est pas connecté
+  beforeLoad: () => {
     const auth = sessionStorage.getItem("auth");
     const isAuthenticated = auth ? JSON.parse(auth).isAuthenticated : false;
 
