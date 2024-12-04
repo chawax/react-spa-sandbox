@@ -11,6 +11,11 @@ import { searchMovies } from "@/services/movies";
 
 type MoviesFilters = {
   query?: string;
+  // The following parameters are not used but are here to demonstrate how to type parameters
+  page?: number;
+  limit?: number;
+  sortBy?: "date" | "title";
+  sortOrder?: "asc" | "desc";
 };
 
 function SearchMoviesPage() {
@@ -65,16 +70,15 @@ export const Route = createFileRoute("/movies/search")({
   // Validate the search parameters
   validateSearch: (search: Record<string, unknown>): MoviesFilters => {
     return {
-      query: search.query as string ,
+      query: search.query as string,
     };
   },
-  
+
   // Dependencies for the loader
-  loaderDeps: ({ search: { query } }) => ({ key:query }),
-  
+  loaderDeps: ({ search: { query } }) => ({ key: query }),
+
   // Loader function
-  loader: ({ deps }) =>
-    deps.key !== undefined ? searchMovies(deps.key) : [],
+  loader: ({ deps }) => (deps.key !== undefined ? searchMovies(deps.key) : []),
 
   // Components
   component: SearchMoviesPage,

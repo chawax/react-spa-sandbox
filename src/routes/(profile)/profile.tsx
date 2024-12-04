@@ -1,9 +1,11 @@
 import {
-  createRootRoute,
+  createRootRouteWithContext,
   Link,
   Outlet,
   redirect,
 } from "@tanstack/react-router";
+
+import { RouterContext } from "@/context";
 
 type NavLinkProps = {
   to: string;
@@ -40,13 +42,10 @@ function ProfileLayout() {
   );
 }
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<RouterContext>()({
   component: ProfileLayout,
-  beforeLoad: () => {
-    const auth = sessionStorage.getItem("auth");
-    const isAuthenticated = auth ? JSON.parse(auth).isAuthenticated : false;
-
-    if (!isAuthenticated) {
+  beforeLoad: ({ context }) => {
+    if (!context.auth?.isAuthenticated) {
       throw redirect({
         to: "/login",
         search: {

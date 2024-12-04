@@ -1,7 +1,8 @@
 import { FormEvent, useState } from "react";
+
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/auth";
 
 function LoginPage() {
   const { login } = useAuth();
@@ -15,9 +16,8 @@ function LoginPage() {
     const username = formData.get("login") as string;
     const password = formData.get("password") as string;
 
-    // Simulation d'une validation simple
     if (username === "admin" && password === "password") {
-      await login();
+      await login(username);
       if (search.redirect) {
         navigate({ to: search.redirect });
       } else {
@@ -78,7 +78,7 @@ function LoginPage() {
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
-  validateSearch: (search: Record<string, unknown>) => {
+  validateSearch: (search: Record<string, unknown>): { redirect?: string } => {
     return {
       redirect: search.redirect as string | undefined,
     };

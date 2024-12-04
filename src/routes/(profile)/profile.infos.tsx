@@ -1,40 +1,42 @@
-import { createFileRoute, useBlocker } from '@tanstack/react-router'
-import { useState } from 'react'
-import { Input } from '@/components/Input'
-import { ConfirmDialog } from '@/components/ConfirmDialog'
+import { useState } from "react";
+
+import { createFileRoute, useBlocker } from "@tanstack/react-router";
+
+import { Input } from "@/components/Input";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
 
 function ProfileInfosPage() {
   // Manage the form data
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-  })
-  const [isDirty, setIsDirty] = useState(false)
+    name: "",
+    email: "",
+  });
+  const [isDirty, setIsDirty] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-    setIsDirty(true)
-  }
+    }));
+    setIsDirty(true);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsDirty(false)
-  }
+    e.preventDefault();
+    setIsDirty(false);
+  };
 
   // Blocker to prevent the user from leaving the page with unsaved changes
 
   const { proceed, reset, status } = useBlocker({
     condition: isDirty,
-  })
+  });
 
   return (
     <>
       <ConfirmDialog
-        isOpen={status === 'blocked'}
+        isOpen={status === "blocked"}
         message="Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"
         onConfirm={proceed}
         onCancel={reset}
@@ -67,9 +69,9 @@ function ProfileInfosPage() {
         </form>
       </div>
     </>
-  )
+  );
 }
 
-export const Route = createFileRoute('/(profile)/profile/infos')({
+export const Route = createFileRoute("/(profile)/profile/infos")({
   component: ProfileInfosPage,
-})
+});
