@@ -1,41 +1,43 @@
-import { createFileRoute, useBlocker } from '@tanstack/react-router'
-import { useState } from 'react'
-import { ConfirmDialog } from '@/components/ConfirmDialog'
+import { useState } from "react";
+
+import { createFileRoute, useBlocker } from "@tanstack/react-router";
+
+import { ConfirmDialog } from "@/components/ConfirmDialog";
 
 function ProfileSettingsPage() {
   const [formData, setFormData] = useState({
-    language: 'fr',
+    language: "fr",
     notifications: false,
-  })
-  const [isDirty, setIsDirty] = useState(false)
+  });
+  const [isDirty, setIsDirty] = useState(false);
 
   const { proceed, reset, status } = useBlocker({
     condition: isDirty,
-  })
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const value =
-      e.target.type === 'checkbox'
+      e.target.type === "checkbox"
         ? (e.target as HTMLInputElement).checked
-        : e.target.value
+        : e.target.value;
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: value,
-    }))
-    setIsDirty(true)
-  }
+    }));
+    setIsDirty(true);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsDirty(false)
-  }
+    e.preventDefault();
+    setIsDirty(false);
+  };
 
   return (
     <>
       <ConfirmDialog
-        isOpen={status === 'blocked'}
+        isOpen={status === "blocked"}
         message="Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"
         onConfirm={proceed}
         onCancel={reset}
@@ -76,9 +78,9 @@ function ProfileSettingsPage() {
         </form>
       </div>
     </>
-  )
+  );
 }
 
-export const Route = createFileRoute('/(profile)/profile/settings')({
+export const Route = createFileRoute("/(profile)/profile/settings")({
   component: ProfileSettingsPage,
-})
+});
