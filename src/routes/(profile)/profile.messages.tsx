@@ -1,10 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 
 type MessageItemProps = {
-  title: string;
-  content: string;
-  date: string;
-};
+  title: string
+  content: string
+  date: string
+}
 
 function MessageItem({ title, content, date }: MessageItemProps) {
   return (
@@ -13,7 +13,7 @@ function MessageItem({ title, content, date }: MessageItemProps) {
       <div className="text-sm text-gray-600">{content}</div>
       <div className="text-xs text-gray-400 mt-1">{date}</div>
     </div>
-  );
+  )
 }
 
 function ProfileMessagesPage() {
@@ -93,9 +93,9 @@ function ProfileMessagesPage() {
         />
       </div>
     </div>
-  );
+  )
 }
 
-export const Route = createFileRoute("/profile/messages")({
+export const Route = createFileRoute('/(profile)/profile/messages')({
   component: ProfileMessagesPage,
-});
+})

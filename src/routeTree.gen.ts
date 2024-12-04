@@ -11,24 +11,18 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as ProfileImport } from './routes/profile'
 import { Route as LoginImport } from './routes/login'
 import { Route as IndexImport } from './routes/index'
-import { Route as ProfileSettingsImport } from './routes/profile.settings'
-import { Route as ProfileMessagesImport } from './routes/profile.messages'
-import { Route as ProfileInfosImport } from './routes/profile.infos'
 import { Route as MoviesTrendingImport } from './routes/movies/trending'
 import { Route as MoviesSearchImport } from './routes/movies/search'
 import { Route as MoviesPopularImport } from './routes/movies/popular'
 import { Route as MoviesMovieIdImport } from './routes/movies/$movieId'
+import { Route as profileProfileImport } from './routes/(profile)/profile'
+import { Route as profileProfileSettingsImport } from './routes/(profile)/profile.settings'
+import { Route as profileProfileMessagesImport } from './routes/(profile)/profile.messages'
+import { Route as profileProfileInfosImport } from './routes/(profile)/profile.infos'
 
 // Create/Update Routes
-
-const ProfileRoute = ProfileImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const LoginRoute = LoginImport.update({
   id: '/login',
@@ -40,24 +34,6 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
-
-const ProfileSettingsRoute = ProfileSettingsImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => ProfileRoute,
-} as any)
-
-const ProfileMessagesRoute = ProfileMessagesImport.update({
-  id: '/messages',
-  path: '/messages',
-  getParentRoute: () => ProfileRoute,
-} as any)
-
-const ProfileInfosRoute = ProfileInfosImport.update({
-  id: '/infos',
-  path: '/infos',
-  getParentRoute: () => ProfileRoute,
 } as any)
 
 const MoviesTrendingRoute = MoviesTrendingImport.update({
@@ -86,6 +62,30 @@ const MoviesMovieIdRoute = MoviesMovieIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const profileProfileRoute = profileProfileImport.update({
+  id: '/(profile)/profile',
+  path: '/profile',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const profileProfileSettingsRoute = profileProfileSettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => profileProfileRoute,
+} as any)
+
+const profileProfileMessagesRoute = profileProfileMessagesImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => profileProfileRoute,
+} as any)
+
+const profileProfileInfosRoute = profileProfileInfosImport.update({
+  id: '/infos',
+  path: '/infos',
+  getParentRoute: () => profileProfileRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -104,11 +104,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/profile': {
-      id: '/profile'
+    '/(profile)/profile': {
+      id: '/(profile)/profile'
       path: '/profile'
       fullPath: '/profile'
-      preLoaderRoute: typeof ProfileImport
+      preLoaderRoute: typeof profileProfileImport
       parentRoute: typeof rootRoute
     }
     '/movies/$movieId': {
@@ -139,85 +139,86 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoviesTrendingImport
       parentRoute: typeof rootRoute
     }
-    '/profile/infos': {
-      id: '/profile/infos'
+    '/(profile)/profile/infos': {
+      id: '/(profile)/profile/infos'
       path: '/infos'
       fullPath: '/profile/infos'
-      preLoaderRoute: typeof ProfileInfosImport
-      parentRoute: typeof ProfileImport
+      preLoaderRoute: typeof profileProfileInfosImport
+      parentRoute: typeof profileProfileImport
     }
-    '/profile/messages': {
-      id: '/profile/messages'
+    '/(profile)/profile/messages': {
+      id: '/(profile)/profile/messages'
       path: '/messages'
       fullPath: '/profile/messages'
-      preLoaderRoute: typeof ProfileMessagesImport
-      parentRoute: typeof ProfileImport
+      preLoaderRoute: typeof profileProfileMessagesImport
+      parentRoute: typeof profileProfileImport
     }
-    '/profile/settings': {
-      id: '/profile/settings'
+    '/(profile)/profile/settings': {
+      id: '/(profile)/profile/settings'
       path: '/settings'
       fullPath: '/profile/settings'
-      preLoaderRoute: typeof ProfileSettingsImport
-      parentRoute: typeof ProfileImport
+      preLoaderRoute: typeof profileProfileSettingsImport
+      parentRoute: typeof profileProfileImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface ProfileRouteChildren {
-  ProfileInfosRoute: typeof ProfileInfosRoute
-  ProfileMessagesRoute: typeof ProfileMessagesRoute
-  ProfileSettingsRoute: typeof ProfileSettingsRoute
+interface profileProfileRouteChildren {
+  profileProfileInfosRoute: typeof profileProfileInfosRoute
+  profileProfileMessagesRoute: typeof profileProfileMessagesRoute
+  profileProfileSettingsRoute: typeof profileProfileSettingsRoute
 }
 
-const ProfileRouteChildren: ProfileRouteChildren = {
-  ProfileInfosRoute: ProfileInfosRoute,
-  ProfileMessagesRoute: ProfileMessagesRoute,
-  ProfileSettingsRoute: ProfileSettingsRoute,
+const profileProfileRouteChildren: profileProfileRouteChildren = {
+  profileProfileInfosRoute: profileProfileInfosRoute,
+  profileProfileMessagesRoute: profileProfileMessagesRoute,
+  profileProfileSettingsRoute: profileProfileSettingsRoute,
 }
 
-const ProfileRouteWithChildren =
-  ProfileRoute._addFileChildren(ProfileRouteChildren)
+const profileProfileRouteWithChildren = profileProfileRoute._addFileChildren(
+  profileProfileRouteChildren,
+)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/profile': typeof ProfileRouteWithChildren
+  '/profile': typeof profileProfileRouteWithChildren
   '/movies/$movieId': typeof MoviesMovieIdRoute
   '/movies/popular': typeof MoviesPopularRoute
   '/movies/search': typeof MoviesSearchRoute
   '/movies/trending': typeof MoviesTrendingRoute
-  '/profile/infos': typeof ProfileInfosRoute
-  '/profile/messages': typeof ProfileMessagesRoute
-  '/profile/settings': typeof ProfileSettingsRoute
+  '/profile/infos': typeof profileProfileInfosRoute
+  '/profile/messages': typeof profileProfileMessagesRoute
+  '/profile/settings': typeof profileProfileSettingsRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/profile': typeof ProfileRouteWithChildren
+  '/profile': typeof profileProfileRouteWithChildren
   '/movies/$movieId': typeof MoviesMovieIdRoute
   '/movies/popular': typeof MoviesPopularRoute
   '/movies/search': typeof MoviesSearchRoute
   '/movies/trending': typeof MoviesTrendingRoute
-  '/profile/infos': typeof ProfileInfosRoute
-  '/profile/messages': typeof ProfileMessagesRoute
-  '/profile/settings': typeof ProfileSettingsRoute
+  '/profile/infos': typeof profileProfileInfosRoute
+  '/profile/messages': typeof profileProfileMessagesRoute
+  '/profile/settings': typeof profileProfileSettingsRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/profile': typeof ProfileRouteWithChildren
+  '/(profile)/profile': typeof profileProfileRouteWithChildren
   '/movies/$movieId': typeof MoviesMovieIdRoute
   '/movies/popular': typeof MoviesPopularRoute
   '/movies/search': typeof MoviesSearchRoute
   '/movies/trending': typeof MoviesTrendingRoute
-  '/profile/infos': typeof ProfileInfosRoute
-  '/profile/messages': typeof ProfileMessagesRoute
-  '/profile/settings': typeof ProfileSettingsRoute
+  '/(profile)/profile/infos': typeof profileProfileInfosRoute
+  '/(profile)/profile/messages': typeof profileProfileMessagesRoute
+  '/(profile)/profile/settings': typeof profileProfileSettingsRoute
 }
 
 export interface FileRouteTypes {
@@ -249,21 +250,21 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/login'
-    | '/profile'
+    | '/(profile)/profile'
     | '/movies/$movieId'
     | '/movies/popular'
     | '/movies/search'
     | '/movies/trending'
-    | '/profile/infos'
-    | '/profile/messages'
-    | '/profile/settings'
+    | '/(profile)/profile/infos'
+    | '/(profile)/profile/messages'
+    | '/(profile)/profile/settings'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
-  ProfileRoute: typeof ProfileRouteWithChildren
+  profileProfileRoute: typeof profileProfileRouteWithChildren
   MoviesMovieIdRoute: typeof MoviesMovieIdRoute
   MoviesPopularRoute: typeof MoviesPopularRoute
   MoviesSearchRoute: typeof MoviesSearchRoute
@@ -273,7 +274,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
-  ProfileRoute: ProfileRouteWithChildren,
+  profileProfileRoute: profileProfileRouteWithChildren,
   MoviesMovieIdRoute: MoviesMovieIdRoute,
   MoviesPopularRoute: MoviesPopularRoute,
   MoviesSearchRoute: MoviesSearchRoute,
@@ -294,7 +295,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/login",
-        "/profile",
+        "/(profile)/profile",
         "/movies/$movieId",
         "/movies/popular",
         "/movies/search",
@@ -307,12 +308,12 @@ export const routeTree = rootRoute
     "/login": {
       "filePath": "login.tsx"
     },
-    "/profile": {
-      "filePath": "profile.tsx",
+    "/(profile)/profile": {
+      "filePath": "(profile)/profile.tsx",
       "children": [
-        "/profile/infos",
-        "/profile/messages",
-        "/profile/settings"
+        "/(profile)/profile/infos",
+        "/(profile)/profile/messages",
+        "/(profile)/profile/settings"
       ]
     },
     "/movies/$movieId": {
@@ -327,17 +328,17 @@ export const routeTree = rootRoute
     "/movies/trending": {
       "filePath": "movies/trending.tsx"
     },
-    "/profile/infos": {
-      "filePath": "profile.infos.tsx",
-      "parent": "/profile"
+    "/(profile)/profile/infos": {
+      "filePath": "(profile)/profile.infos.tsx",
+      "parent": "/(profile)/profile"
     },
-    "/profile/messages": {
-      "filePath": "profile.messages.tsx",
-      "parent": "/profile"
+    "/(profile)/profile/messages": {
+      "filePath": "(profile)/profile.messages.tsx",
+      "parent": "/(profile)/profile"
     },
-    "/profile/settings": {
-      "filePath": "profile.settings.tsx",
-      "parent": "/profile"
+    "/(profile)/profile/settings": {
+      "filePath": "(profile)/profile.settings.tsx",
+      "parent": "/(profile)/profile"
     }
   }
 }
