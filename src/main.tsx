@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 
 // Import the generated route tree
@@ -26,10 +25,8 @@ function InnerApp() {
   return <RouterProvider router={router} context={{ auth }} />;
 }
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <InnerApp />
-    </AuthProvider>
-  </React.StrictMode>,
+createRoot(document.getElementById("root")!).render(
+  <AuthProvider>
+    <InnerApp />
+  </AuthProvider>,
 );
