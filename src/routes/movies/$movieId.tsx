@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { format, parse } from "date-fns";
 
-import ActorsList from "@/components/ActorsList";
-import ErrorComponent from "@/components/ErrorComponent";
-import FavoriteButton from "@/components/FavoriteButton";
-import Loader from "@/components/Loader";
+import ActorsList from "@/components/actors-list/ActorsList";
+import ErrorComponent from "@/components/error-component/ErrorComponent";
+import FavoriteButton from "@/components/favorite-button/FavoriteButton";
+import Loader from "@/components/loader/Loader";
 import { fetchOneMovie } from "@/services/movies";
 
 const voteFormatter = new Intl.NumberFormat("fr-FR", {

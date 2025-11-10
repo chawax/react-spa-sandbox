@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { createFileRoute, useBlocker } from "@tanstack/react-router";
 
-import { Input } from "@/components/Input";
-import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { Input } from "@/components/input/Input";
+import { ConfirmDialog } from "@/components/confirm-dialog/ConfirmDialog";
 
 function ProfileInfosPage() {
   // Manage the form data

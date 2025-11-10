@@ -5,8 +5,8 @@ import {
 } from "@tanstack/react-router";
 import { useState } from "react";
 
-import Loader from "@/components/Loader";
-import MoviesList from "@/components/MoviesList";
+import Loader from "@/components/loader/Loader";
+import MoviesList from "@/components/movies-list/MoviesList";
 import { searchMovies } from "@/services/movies";
 
 type MoviesFilters = {

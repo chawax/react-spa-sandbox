@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { createFileRoute, useBlocker } from "@tanstack/react-router";
 
-import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { ConfirmDialog } from "@/components/confirm-dialog/ConfirmDialog";
 
 function ProfileSettingsPage() {
   const [formData, setFormData] = useState({

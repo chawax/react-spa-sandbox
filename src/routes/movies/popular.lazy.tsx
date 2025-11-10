@@ -1,8 +1,8 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
 
-import ErrorComponent from '@/components/ErrorComponent'
-import Loader from '@/components/Loader'
-import MoviesList from '@/components/MoviesList'
+import ErrorComponent from '@/components/error-component/ErrorComponent'
+import Loader from '@/components/loader/Loader'
+import MoviesList from '@/components/movies-list/MoviesList'
 
 function PopularMoviesPage() {
   const movies = Route.useLoaderData()
