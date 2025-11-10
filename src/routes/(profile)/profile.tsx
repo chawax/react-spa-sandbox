@@ -1,11 +1,4 @@
-import {
-  createRootRouteWithContext,
-  Link,
-  Outlet,
-  redirect,
-} from "@tanstack/react-router";
-
-import { RouterContext } from "@/context";
+import { createFileRoute, Link, Outlet, redirect } from "@tanstack/react-router"
 
 type NavLinkProps = {
   to: string;
@@ -42,7 +35,7 @@ function ProfileLayout() {
   );
 }
 
-export const Route = createRootRouteWithContext<RouterContext>()({
+export const Route = createFileRoute("/(profile)/profile")({
   component: ProfileLayout,
   beforeLoad: ({ context }) => {
     if (!context.auth?.isAuthenticated) {

@@ -8,17 +8,11 @@ import { ConfirmDialog } from "@/components/ConfirmDialog";
 function ProfileInfosPage() {
   // Manage the form data
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "" });
   const [isDirty, setIsDirty] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setIsDirty(true);
   };
 
@@ -29,17 +23,15 @@ function ProfileInfosPage() {
 
   // Blocker to prevent the user from leaving the page with unsaved changes
 
-  const { proceed, reset, status } = useBlocker({
-    condition: isDirty,
-  });
+  const { proceed, reset, status } = useBlocker({ condition: isDirty });
 
   return (
     <>
       <ConfirmDialog
         isOpen={status === "blocked"}
         message="Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"
-        onConfirm={proceed}
-        onCancel={reset}
+        onConfirm={proceed || (() => {})}
+        onCancel={reset || (() => {})}
       />
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-2xl font-bold mb-6">Mes informations</h2>

@@ -3,14 +3,14 @@ async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export interface AuthContext {
+export interface AuthContextType {
   isAuthenticated: boolean;
   login: (username: string) => Promise<void>;
   logout: () => Promise<void>;
   user: string | null;
 }
 
-const AuthContext = React.createContext<AuthContext | null>(null);
+const AuthContext = React.createContext<AuthContextType | null>(null);
 
 const key = "tanstack.auth.user";
 
