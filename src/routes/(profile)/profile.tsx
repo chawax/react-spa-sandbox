@@ -1,9 +1,11 @@
-import { createFileRoute, Link, Outlet, redirect } from "@tanstack/react-router"
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  redirect,
+} from "@tanstack/react-router";
 
-type NavLinkProps = {
-  to: string;
-  children: React.ReactNode;
-};
+type NavLinkProps = { to: string; children: React.ReactNode };
 
 function NavLink({ to, children }: NavLinkProps) {
   return (
@@ -39,12 +41,7 @@ export const Route = createFileRoute("/(profile)/profile")({
   component: ProfileLayout,
   beforeLoad: ({ context }) => {
     if (!context.auth?.isAuthenticated) {
-      throw redirect({
-        to: "/login",
-        search: {
-          redirect: location.pathname,
-        },
-      });
+      throw redirect({ to: "/login", search: { redirect: location.pathname } });
     }
   },
 });
