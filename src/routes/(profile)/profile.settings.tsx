@@ -39,8 +39,8 @@ function ProfileSettingsPage() {
       <ConfirmDialog
         isOpen={status === "blocked"}
         message="Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"
-        onConfirm={proceed}
-        onCancel={reset}
+        onConfirm={proceed || (() => {})}
+        onCancel={reset || (() => {})}
       />
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-2xl font-bold mb-6">Mes Paramètres</h2>

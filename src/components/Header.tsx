@@ -1,4 +1,4 @@
-import { useAuth } from "@/auth";
+import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "@tanstack/react-router";
 
 type NavLinkProps = {
@@ -26,8 +26,8 @@ export default function Header() {
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     navigate({ to: "/" });
   };
 

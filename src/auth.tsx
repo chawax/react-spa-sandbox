@@ -1,16 +1,16 @@
 import * as React from "react";
+import { AuthContext } from "./context/AuthContext";
+
 async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export interface AuthContext {
+export interface AuthContextType {
   isAuthenticated: boolean;
   login: (username: string) => Promise<void>;
   logout: () => Promise<void>;
   user: string | null;
 }
-
-const AuthContext = React.createContext<AuthContext | null>(null);
 
 const key = "tanstack.auth.user";
 
@@ -51,12 +51,4 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const context = React.useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 }

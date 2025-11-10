@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const loadFavorites = (): string[] => {
   const value = localStorage.getItem("favorites");
@@ -11,12 +11,7 @@ const saveFavorites = (favorites: string[]): void => {
 };
 
 const useFavorite = (id: string) => {
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  useEffect(() => {
-    const favorites = loadFavorites();
-    setFavorites(favorites);
-  }, []);
+  const [favorites, setFavorites] = useState<string[]>(() => loadFavorites());
 
   const favorite = favorites.includes(id);
 
