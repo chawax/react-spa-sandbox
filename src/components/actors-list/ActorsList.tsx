@@ -1,5 +1,5 @@
 import { Actor } from "@/types";
-import ActorCard from "./ActorCard";
+import ActorCard from "../actor-card/ActorCard";
 
 type ActorsListProps = {
   actors: Actor[];
