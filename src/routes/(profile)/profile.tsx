@@ -1,16 +1,11 @@
 import {
-  createRootRouteWithContext,
+  createFileRoute,
   Link,
   Outlet,
   redirect,
 } from "@tanstack/react-router";
 
-import { RouterContext } from "@/context";
-
-type NavLinkProps = {
-  to: string;
-  children: React.ReactNode;
-};
+type NavLinkProps = { to: string; children: React.ReactNode };
 
 function NavLink({ to, children }: NavLinkProps) {
   return (
@@ -42,16 +37,11 @@ function ProfileLayout() {
   );
 }
 
-export const Route = createRootRouteWithContext<RouterContext>()({
+export const Route = createFileRoute("/(profile)/profile")({
   component: ProfileLayout,
   beforeLoad: ({ context }) => {
     if (!context.auth?.isAuthenticated) {
-      throw redirect({
-        to: "/login",
-        search: {
-          redirect: location.pathname,
-        },
-      });
+      throw redirect({ to: "/login", search: { redirect: location.pathname } });
     }
   },
 });

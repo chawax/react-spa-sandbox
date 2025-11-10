@@ -8,178 +8,70 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as MoviesTrendingRouteImport } from './routes/movies/trending'
+import { Route as MoviesSearchRouteImport } from './routes/movies/search'
+import { Route as MoviesPopularRouteImport } from './routes/movies/popular'
+import { Route as MoviesMovieIdRouteImport } from './routes/movies/$movieId'
+import { Route as profileProfileRouteImport } from './routes/(profile)/profile'
+import { Route as profileProfileSettingsRouteImport } from './routes/(profile)/profile.settings'
+import { Route as profileProfileMessagesRouteImport } from './routes/(profile)/profile.messages'
+import { Route as profileProfileInfosRouteImport } from './routes/(profile)/profile.infos'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as LoginImport } from './routes/login'
-import { Route as IndexImport } from './routes/index'
-import { Route as MoviesTrendingImport } from './routes/movies/trending'
-import { Route as MoviesSearchImport } from './routes/movies/search'
-import { Route as MoviesPopularImport } from './routes/movies/popular'
-import { Route as MoviesMovieIdImport } from './routes/movies/$movieId'
-import { Route as profileProfileImport } from './routes/(profile)/profile'
-import { Route as profileProfileSettingsImport } from './routes/(profile)/profile.settings'
-import { Route as profileProfileMessagesImport } from './routes/(profile)/profile.messages'
-import { Route as profileProfileInfosImport } from './routes/(profile)/profile.infos'
-
-// Create/Update Routes
-
-const LoginRoute = LoginImport.update({
+const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const MoviesTrendingRoute = MoviesTrendingImport.update({
+const MoviesTrendingRoute = MoviesTrendingRouteImport.update({
   id: '/movies/trending',
   path: '/movies/trending',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const MoviesSearchRoute = MoviesSearchImport.update({
+const MoviesSearchRoute = MoviesSearchRouteImport.update({
   id: '/movies/search',
   path: '/movies/search',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const MoviesPopularRoute = MoviesPopularImport.update({
+const MoviesPopularRoute = MoviesPopularRouteImport.update({
   id: '/movies/popular',
   path: '/movies/popular',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/movies/popular.lazy').then((d) => d.Route),
 )
-
-const MoviesMovieIdRoute = MoviesMovieIdImport.update({
+const MoviesMovieIdRoute = MoviesMovieIdRouteImport.update({
   id: '/movies/$movieId',
   path: '/movies/$movieId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const profileProfileRoute = profileProfileImport.update({
+const profileProfileRoute = profileProfileRouteImport.update({
   id: '/(profile)/profile',
   path: '/profile',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const profileProfileSettingsRoute = profileProfileSettingsImport.update({
+const profileProfileSettingsRoute = profileProfileSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => profileProfileRoute,
 } as any)
-
-const profileProfileMessagesRoute = profileProfileMessagesImport.update({
+const profileProfileMessagesRoute = profileProfileMessagesRouteImport.update({
   id: '/messages',
   path: '/messages',
   getParentRoute: () => profileProfileRoute,
 } as any)
-
-const profileProfileInfosRoute = profileProfileInfosImport.update({
+const profileProfileInfosRoute = profileProfileInfosRouteImport.update({
   id: '/infos',
   path: '/infos',
   getParentRoute: () => profileProfileRoute,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/(profile)/profile': {
-      id: '/(profile)/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof profileProfileImport
-      parentRoute: typeof rootRoute
-    }
-    '/movies/$movieId': {
-      id: '/movies/$movieId'
-      path: '/movies/$movieId'
-      fullPath: '/movies/$movieId'
-      preLoaderRoute: typeof MoviesMovieIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/movies/popular': {
-      id: '/movies/popular'
-      path: '/movies/popular'
-      fullPath: '/movies/popular'
-      preLoaderRoute: typeof MoviesPopularImport
-      parentRoute: typeof rootRoute
-    }
-    '/movies/search': {
-      id: '/movies/search'
-      path: '/movies/search'
-      fullPath: '/movies/search'
-      preLoaderRoute: typeof MoviesSearchImport
-      parentRoute: typeof rootRoute
-    }
-    '/movies/trending': {
-      id: '/movies/trending'
-      path: '/movies/trending'
-      fullPath: '/movies/trending'
-      preLoaderRoute: typeof MoviesTrendingImport
-      parentRoute: typeof rootRoute
-    }
-    '/(profile)/profile/infos': {
-      id: '/(profile)/profile/infos'
-      path: '/infos'
-      fullPath: '/profile/infos'
-      preLoaderRoute: typeof profileProfileInfosImport
-      parentRoute: typeof profileProfileImport
-    }
-    '/(profile)/profile/messages': {
-      id: '/(profile)/profile/messages'
-      path: '/messages'
-      fullPath: '/profile/messages'
-      preLoaderRoute: typeof profileProfileMessagesImport
-      parentRoute: typeof profileProfileImport
-    }
-    '/(profile)/profile/settings': {
-      id: '/(profile)/profile/settings'
-      path: '/settings'
-      fullPath: '/profile/settings'
-      preLoaderRoute: typeof profileProfileSettingsImport
-      parentRoute: typeof profileProfileImport
-    }
-  }
-}
-
-// Create and export the route tree
-
-interface profileProfileRouteChildren {
-  profileProfileInfosRoute: typeof profileProfileInfosRoute
-  profileProfileMessagesRoute: typeof profileProfileMessagesRoute
-  profileProfileSettingsRoute: typeof profileProfileSettingsRoute
-}
-
-const profileProfileRouteChildren: profileProfileRouteChildren = {
-  profileProfileInfosRoute: profileProfileInfosRoute,
-  profileProfileMessagesRoute: profileProfileMessagesRoute,
-  profileProfileSettingsRoute: profileProfileSettingsRoute,
-}
-
-const profileProfileRouteWithChildren = profileProfileRoute._addFileChildren(
-  profileProfileRouteChildren,
-)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -193,7 +85,6 @@ export interface FileRoutesByFullPath {
   '/profile/messages': typeof profileProfileMessagesRoute
   '/profile/settings': typeof profileProfileSettingsRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
@@ -206,9 +97,8 @@ export interface FileRoutesByTo {
   '/profile/messages': typeof profileProfileMessagesRoute
   '/profile/settings': typeof profileProfileSettingsRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/(profile)/profile': typeof profileProfileRouteWithChildren
@@ -220,7 +110,6 @@ export interface FileRoutesById {
   '/(profile)/profile/messages': typeof profileProfileMessagesRoute
   '/(profile)/profile/settings': typeof profileProfileSettingsRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -260,7 +149,6 @@ export interface FileRouteTypes {
     | '/(profile)/profile/settings'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
@@ -271,6 +159,97 @@ export interface RootRouteChildren {
   MoviesTrendingRoute: typeof MoviesTrendingRoute
 }
 
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/movies/trending': {
+      id: '/movies/trending'
+      path: '/movies/trending'
+      fullPath: '/movies/trending'
+      preLoaderRoute: typeof MoviesTrendingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/movies/search': {
+      id: '/movies/search'
+      path: '/movies/search'
+      fullPath: '/movies/search'
+      preLoaderRoute: typeof MoviesSearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/movies/popular': {
+      id: '/movies/popular'
+      path: '/movies/popular'
+      fullPath: '/movies/popular'
+      preLoaderRoute: typeof MoviesPopularRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/movies/$movieId': {
+      id: '/movies/$movieId'
+      path: '/movies/$movieId'
+      fullPath: '/movies/$movieId'
+      preLoaderRoute: typeof MoviesMovieIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(profile)/profile': {
+      id: '/(profile)/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof profileProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(profile)/profile/settings': {
+      id: '/(profile)/profile/settings'
+      path: '/settings'
+      fullPath: '/profile/settings'
+      preLoaderRoute: typeof profileProfileSettingsRouteImport
+      parentRoute: typeof profileProfileRoute
+    }
+    '/(profile)/profile/messages': {
+      id: '/(profile)/profile/messages'
+      path: '/messages'
+      fullPath: '/profile/messages'
+      preLoaderRoute: typeof profileProfileMessagesRouteImport
+      parentRoute: typeof profileProfileRoute
+    }
+    '/(profile)/profile/infos': {
+      id: '/(profile)/profile/infos'
+      path: '/infos'
+      fullPath: '/profile/infos'
+      preLoaderRoute: typeof profileProfileInfosRouteImport
+      parentRoute: typeof profileProfileRoute
+    }
+  }
+}
+
+interface profileProfileRouteChildren {
+  profileProfileInfosRoute: typeof profileProfileInfosRoute
+  profileProfileMessagesRoute: typeof profileProfileMessagesRoute
+  profileProfileSettingsRoute: typeof profileProfileSettingsRoute
+}
+
+const profileProfileRouteChildren: profileProfileRouteChildren = {
+  profileProfileInfosRoute: profileProfileInfosRoute,
+  profileProfileMessagesRoute: profileProfileMessagesRoute,
+  profileProfileSettingsRoute: profileProfileSettingsRoute,
+}
+
+const profileProfileRouteWithChildren = profileProfileRoute._addFileChildren(
+  profileProfileRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
@@ -280,64 +259,6 @@ const rootRouteChildren: RootRouteChildren = {
   MoviesSearchRoute: MoviesSearchRoute,
   MoviesTrendingRoute: MoviesTrendingRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/login",
-        "/(profile)/profile",
-        "/movies/$movieId",
-        "/movies/popular",
-        "/movies/search",
-        "/movies/trending"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/login": {
-      "filePath": "login.tsx"
-    },
-    "/(profile)/profile": {
-      "filePath": "(profile)/profile.tsx",
-      "children": [
-        "/(profile)/profile/infos",
-        "/(profile)/profile/messages",
-        "/(profile)/profile/settings"
-      ]
-    },
-    "/movies/$movieId": {
-      "filePath": "movies/$movieId.tsx"
-    },
-    "/movies/popular": {
-      "filePath": "movies/popular.tsx"
-    },
-    "/movies/search": {
-      "filePath": "movies/search.tsx"
-    },
-    "/movies/trending": {
-      "filePath": "movies/trending.tsx"
-    },
-    "/(profile)/profile/infos": {
-      "filePath": "(profile)/profile.infos.tsx",
-      "parent": "/(profile)/profile"
-    },
-    "/(profile)/profile/messages": {
-      "filePath": "(profile)/profile.messages.tsx",
-      "parent": "/(profile)/profile"
-    },
-    "/(profile)/profile/settings": {
-      "filePath": "(profile)/profile.settings.tsx",
-      "parent": "/(profile)/profile"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
