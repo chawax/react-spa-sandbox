@@ -3,7 +3,8 @@ import "./index.css";
 
 // Import the generated route tree
 import { createRouter, RouterProvider } from "@tanstack/react-router";
-import { AuthProvider, useAuth } from "./auth";
+import { AuthProvider } from "./auth";
+import { useAuth } from "./hooks/useAuth";
 import { routeTree } from "./routeTree.gen";
 
 // Create a new router instance
@@ -20,7 +21,7 @@ declare module "@tanstack/react-router" {
   }
 }
 
-function InnerApp() {
+export function InnerApp() {
   const auth = useAuth();
   return <RouterProvider router={router} context={{ auth }} />;
 }

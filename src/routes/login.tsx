@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
-import { useAuth } from "@/auth";
+import { useAuth } from "@/hooks/useAuth";
 
 function LoginPage() {
   const { login } = useAuth();
