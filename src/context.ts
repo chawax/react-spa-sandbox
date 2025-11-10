@@ -1,5 +1,5 @@
-import { AuthContext } from "./auth";
+import { AuthContextType } from "./auth";
 
 export interface RouterContext {
-  auth?: AuthContext;
+  auth?: AuthContextType;
 }

@@ -129,11 +129,6 @@ export const searchMovies = async (
   return (
     results
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      // .filter((movie: any) => {
-      //   // We remove movies with no release date
-      //   return movie.release_date !== "";
-      // })
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .map((result: any) => {
         return {
           id: result.id,
